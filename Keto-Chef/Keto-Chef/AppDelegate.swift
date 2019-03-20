@@ -19,7 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         let homeViewController = UIViewController()
         homeViewController.view.backgroundColor = UIColor.cyan
-        window!.rootViewController = homeViewController
+        
+        let layout = UICollectionViewFlowLayout()
+        window!.rootViewController = UINavigationController(rootViewController: FeedViewController(collectionViewLayout: layout))
         window!.makeKeyAndVisible()
         FirebaseApp.configure()
         return true
