@@ -46,18 +46,18 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         }()
         let seperatorView: UIView = {
             let view = UIView()
-            view.backgroundColor = .red
-            view.translatesAutoresizingMaskIntoConstraints = false
+            view.backgroundColor = .black
             return view
         }()
         
         func setupViews() {
             addSubview(thumbnailImageView)
             addSubview(seperatorView)
-            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[v0]-16-|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0": thumbnailImageView]))
-            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-16-[v0]-16-|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0": thumbnailImageView]))
-            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0": seperatorView]))
-            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0(1)]|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0": seperatorView]))
+            
+            
+                addContraintsWithFormat(format: "H:|-16-[v0]-16-|", views: thumbnailImageView)
+                addContraintsWithFormat(format: "V:|-16-[v0]-16-[v1(1)]|", views: thumbnailImageView, seperatorView)
+                addContraintsWithFormat(format: "H:|[v0]|", views: seperatorView)
         
         }
         required init?(coder aDecoder: NSCoder) {
@@ -65,4 +65,19 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         }
     }
 }
+extension UIView {
+        func addContraintsWithFormat(format: String, views: UIView...) {
+            
+            var viewsDictionary = [String: UIView]()
+            for (index, view) in views.enumerated() {
+                let key = "v\(index)"
+                view.translatesAutoresizingMaskIntoConstraints = false
+                viewsDictionary[key] = view
+                
+            }
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: viewsDictionary))
+            
+        }
+    }
+
 
