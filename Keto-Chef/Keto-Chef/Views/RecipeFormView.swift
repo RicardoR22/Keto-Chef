@@ -10,7 +10,13 @@ import UIKit
 
 class RecipeFormView: UIView {
 
-    var stackView: UIStackView!
+    var formView = UIView()
+    var ingredientsListTable = UITableView()
+    var directionsListTable = UITableView()
+    
+    var ingredientsList:[String] = []
+    var directionsList:[String] = []
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -19,95 +25,143 @@ class RecipeFormView: UIView {
     
     func setupView() {
         backgroundColor = .white
-        stackView = setupStackView()
-        addSubview(stackView)
-        setStackViewConstraints()
+        setupSubViews()
+        createHeaderView()
+        //createButton.isHidden = true
+        ingredientsListTable.isHidden = true
+        directionsListTable.isHidden = true
+        backButton.isHidden = true
+        ingredientsListTable.register(IngredientsTableViewCell.self, forCellReuseIdentifier: "ingredient cell")
+        directionsListTable.register(IngredientsTableViewCell.self, forCellReuseIdentifier: "ingredient cell")
+        setViewConstraints()
+    }
+    
+    func setupSubViews() {
+        addSubview(InstructionLabel)
+        addSubview(formView)
+        formView.addSubview(recipeNameField)
+        formView.addSubview(recipeInfoField)
+        formView.addSubview(ingredientsListTable)
+        formView.addSubview(directionsListTable)
+        addSubview(backButton)
+        addSubview(nextButton)
     }
     
     // MARK: UI
     
-    let firstNameField: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .none
-        textField.backgroundColor = UIColor(red: 0/255, green: 139/255, blue: 139/255, alpha: 0.3)
+    let InstructionLabel: UILabel = {
+        let textField = UILabel()
         textField.layer.cornerRadius = 5
         textField.textColor = .black
+        textField.font = UIFont.boldSystemFont(ofSize: 18)
+        textField.textAlignment = .center
         
-        let placeholder = NSMutableAttributedString(attributedString: NSAttributedString(string: "First Name", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(white: 1, alpha: 0.7)]))
-        textField.attributedPlaceholder = placeholder
-        textField.autocapitalizationType = .none
-        textField.autocorrectionType = .no
-        textField.heightAnchor.constraint(equalToConstant: 40)
+        textField.text = "Give your recipe a name and short description"
         return textField
     }()
     
-    let lastNameField: UITextField = {
+    let recipeNameField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .none
-        textField.backgroundColor = UIColor(red: 0/255, green: 139/255, blue: 139/255, alpha: 0.3)
+        textField.backgroundColor = UIColor(red: 61/255, green: 204/255, blue: 142/255, alpha: 1)
         textField.layer.cornerRadius = 5
         textField.textColor = .black
         
-        let placeholder = NSMutableAttributedString(attributedString: NSAttributedString(string: "Last Name", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(white: 1, alpha: 0.7)]))
+        let placeholder = NSMutableAttributedString(attributedString: NSAttributedString(string: "Recipe Name", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(white: 1, alpha: 0.9)]))
         textField.attributedPlaceholder = placeholder
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
-        textField.heightAnchor.constraint(equalToConstant: 40)
+        textField.leftPadding(space: 5)
         return textField
     }()
     
-
-    let emailField: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .none
-        textField.backgroundColor = UIColor(red: 0/255, green: 139/255, blue: 139/255, alpha: 0.3)
+    let recipeInfoField: UITextView = {
+        let textField = UITextView()
+        textField.backgroundColor = UIColor(red: 61/255, green: 204/255, blue: 142/255, alpha: 1)
         textField.layer.cornerRadius = 5
         textField.textColor = .black
         
-        let placeholder = NSMutableAttributedString(attributedString: NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(white: 1, alpha: 0.7)]))
-        textField.attributedPlaceholder = placeholder
+        let placeholder = NSMutableAttributedString(attributedString: NSAttributedString(string: "Recipe Description", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(white: 1, alpha: 0.9)]))
+        textField.attributedText = placeholder
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
-        textField.heightAnchor.constraint(equalToConstant: 40)
+        //textField.clearsOnInsertion = true
+        textField.isEditable = true
+        textField.textContainerInset = UIEdgeInsets(top: 5,left: 2,bottom: 0,right: 5)
         return textField
     }()
     
-    let passwordField: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .none
-        textField.backgroundColor = UIColor(red: 0/255, green: 139/255, blue: 139/255, alpha: 0.3)
-        textField.layer.cornerRadius = 5
-        textField.textColor = .black
-        
-        let placeholder = NSMutableAttributedString(attributedString: NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(white: 1, alpha: 0.7)]))
-        textField.attributedPlaceholder = placeholder
-        textField.autocapitalizationType = .none
-        textField.autocorrectionType = .no
-        textField.isSecureTextEntry = true
-        textField.heightAnchor.constraint(equalToConstant: 40)
-        return textField
-    }()
+//    let createButton: UIButton = {
+//        let button = UIButton()
+//        let buttonColor = UIColor(white: 1, alpha: 0.7)
+//        let buttonText = NSMutableAttributedString(attributedString: NSAttributedString(string: "Create", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(white: 1, alpha: 0.9)]))
+//        button.backgroundColor = UIColor(red: 61/255, green: 204/255, blue: 142/255, alpha: 1)
+//        button.setAttributedTitle(buttonText, for: .normal)
+//        button.layer.cornerRadius = 5
+//        button.heightAnchor.constraint(equalToConstant: 40)
+//        return button
+//    }()
     
-    
-    let registerButton: UIButton = {
+    let nextButton: UIButton = {
         let button = UIButton()
         let buttonColor = UIColor(white: 1, alpha: 0.7)
-        let buttonText = NSMutableAttributedString(attributedString: NSAttributedString(string: "Register", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(white: 1, alpha: 0.7)]))
-        button.backgroundColor = UIColor(red: 0/255, green: 139/255, blue: 139/255, alpha: 1)
+        let buttonText = NSMutableAttributedString(attributedString: NSAttributedString(string: "Next", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(white: 1, alpha: 0.9)]))
+        button.backgroundColor = UIColor(red: 61/255, green: 204/255, blue: 142/255, alpha: 1)
         button.setAttributedTitle(buttonText, for: .normal)
         button.layer.cornerRadius = 5
-        button.heightAnchor.constraint(equalToConstant: 40)
         return button
     }()
     
-    func setupStackView() -> UIStackView {
-        let stackView = UIStackView(arrangedSubviews: [firstNameField, lastNameField, emailField, passwordField, registerButton])
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
-        stackView.spacing = 10
-        return stackView
-    }
+    let backButton: UIButton = {
+        let button = UIButton()
+        let buttonColor = UIColor(white: 1, alpha: 0.7)
+        let buttonText = NSMutableAttributedString(attributedString: NSAttributedString(string: "Back", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor.lightGray]))
+        //button.backgroundColor = UIColor(red: 61/255, green: 204/255, blue: 142/255, alpha: 1)
+        button.setAttributedTitle(buttonText, for: .normal)
+        button.layer.cornerRadius = 5
+        return button
+    }()
     
+    let ingredientListheader = UIView()
+    let addItemBtn = UIButton.init(type: .contactAdd)
+    let ingredientListheaderLabel = UILabel()
+    
+    let directionsListheader = UIView()
+    let addDirectionBtn = UIButton.init(type: .contactAdd)
+    let directionsListheaderLabel = UILabel()
+    
+    func createHeaderView() {
+        // Header for ingredients list
+        ingredientListheader.frame = CGRect(x: 0, y: 0, width: self.ingredientsListTable.frame.width, height: 40)
+        ingredientListheader.backgroundColor = UIColor(red: 61/255, green: 204/255, blue: 142/255, alpha: 1)
+        
+        ingredientListheaderLabel.text = "Ingredients"
+        ingredientListheaderLabel.textColor = UIColor(white: 1, alpha: 0.9)
+        
+        addItemBtn.tintColor = .white
+        
+        ingredientListheader.addSubview(ingredientListheaderLabel)
+        ingredientListheader.addSubview(addItemBtn)
+        
+        // Header for directions list
+        directionsListheader.frame = CGRect(x: 0, y: 0, width: self.ingredientsListTable.frame.width, height: 40)
+        directionsListheader.backgroundColor = UIColor(red: 61/255, green: 204/255, blue: 142/255, alpha: 1)
+        
+        directionsListheaderLabel.text = "Directions"
+        directionsListheaderLabel.textColor = UIColor(white: 1, alpha: 0.9)
+        
+        addDirectionBtn.tintColor = .white
+        
+        directionsListheader.addSubview(directionsListheaderLabel)
+        directionsListheader.addSubview(addDirectionBtn)
+        
+        
+        addSubview(ingredientListheader)
+        ingredientsListTable.tableHeaderView = ingredientListheader
+        addSubview(directionsListheader)
+        directionsListTable.tableHeaderView = directionsListheader
+    }
+     
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
