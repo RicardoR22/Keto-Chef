@@ -123,8 +123,7 @@
 			children = (
 				8D7F51CE2243585D00FB2267 /* Recipe.swift */,
 			);
-			name = Models;
-			path = ../Models;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		8D7F51C022420C5400FB2267 /* Extensions */ = {
