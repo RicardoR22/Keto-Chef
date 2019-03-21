@@ -14,12 +14,23 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        navigationItem.title = "Trending Recipes"
+        
+        navigationItem.title = "All Recipes"
+        let addRecipe = UIBarButtonItem(title: "Add Recipe", style: .plain, target: self, action: #selector(addRecipeTapped))
+        addRecipe.tintColor = UIColor(red: 61/255, green: 204/255, blue: 142/255, alpha: 1)
+        navigationItem.rightBarButtonItem = addRecipe
+        
         collectionView?.delegate = self
         collectionView?.dataSource = self
         collectionView?.backgroundColor = .white
         collectionView?.register(RecipeCell.self, forCellWithReuseIdentifier: "cellId")
     }
+    
+    @objc func addRecipeTapped() {
+        let newRecipeVC = RecipeFormViewController()
+        self.navigationController?.pushViewController(newRecipeVC, animated: true)
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 3
     }

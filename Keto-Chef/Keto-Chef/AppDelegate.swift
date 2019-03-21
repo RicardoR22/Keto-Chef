@@ -17,11 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        let homeViewController = UIViewController()
+        let nav = UINavigationController()
 
-        
         let layout = UICollectionViewFlowLayout()
-        window!.rootViewController = UINavigationController(rootViewController: FeedViewController(collectionViewLayout: layout))
+        nav.viewControllers = [FeedViewController(collectionViewLayout: layout)]
+        window!.rootViewController = nav
         window!.makeKeyAndVisible()
         FirebaseApp.configure()
         return true
