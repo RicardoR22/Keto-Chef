@@ -49,7 +49,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         
         let seperatorView: UIView = {
             let view = UIView()
-            view.backgroundColor = .black
+            view.backgroundColor = .lightGray
             return view
         }()
         
@@ -70,6 +70,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         func setupViews() {
                 
             addSubview(thumbnailImageView)
+            addSubview(seperatorView)
             addSubview(titleLabel)
             addSubview(descriptionLabel)
             
@@ -78,6 +79,11 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
             thumbnailImageView.widthAnchor.constraint(equalToConstant: self.frame.width * 0.4).isActive = true
             thumbnailImageView.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor).isActive = true
             thumbnailImageView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
+            
+            seperatorView.translatesAutoresizingMaskIntoConstraints = false
+            seperatorView.heightAnchor.constraint(equalToConstant: self.frame.height * 0.01).isActive = true
+            seperatorView.widthAnchor.constraint(equalToConstant: self.frame.width).isActive = true
+            seperatorView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
             
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
             titleLabel.heightAnchor.constraint(equalToConstant: self.frame.height * 0.2).isActive = true
