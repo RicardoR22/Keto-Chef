@@ -15,11 +15,13 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         navigationItem.title = "Trending Recipes"
-        collectionView?.backgroundColor = .cyan
+        collectionView?.delegate = self
+        collectionView?.dataSource = self
+        collectionView?.backgroundColor = .white
         collectionView?.register(RecipeCell.self, forCellWithReuseIdentifier: "cellId")
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 3
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
@@ -30,7 +32,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         return CGSize(width: view.frame.width, height: 200)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 1
     }
     class RecipeCell: UICollectionViewCell {
         override init(frame: CGRect) {
@@ -40,15 +42,10 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         
         let thumbnailImageView: UIImageView = {
             let imageView = UIImageView()
-            imageView.backgroundColor = .blue
+            imageView.backgroundColor = UIColor.init(red: 61/255, green: 204/255, blue: 142/255, alpha: 1)
             return imageView
         }()
         
-        let profileImage: UIImageView = {
-            let imageView = UIImageView()
-            imageView.backgroundColor = .red
-            return imageView
-        }()
         
         let seperatorView: UIView = {
             let view = UIView()
@@ -58,66 +55,47 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         
         let titleLabel: UILabel = {
             let label = UILabel()
-            label.backgroundColor = .red
+            label.backgroundColor = UIColor.init(red: 61/255, green: 204/255, blue: 142/255, alpha: 1)
             label.translatesAutoresizingMaskIntoConstraints = false
             return label
         }()
         
         let descriptionLabel: UILabel = {
             let label = UILabel()
-            label.backgroundColor = .black
+            label.backgroundColor = UIColor.init(red: 61/255, green: 204/255, blue: 142/255, alpha: 1)
             label.translatesAutoresizingMaskIntoConstraints = false
             return label
         }()
         
         func setupViews() {
+                
             addSubview(thumbnailImageView)
-            addSubview(seperatorView)
-            addSubview(profileImage)
             addSubview(titleLabel)
             addSubview(descriptionLabel)
             
-            //height contraints
-            addContraintsWithFormat(format: "H:|-30-[v0]-230-|", views: thumbnailImageView)
-//            addContraintsWithFormat(format: "H:|-30-[v0(44)]", views: profileImage)
-            //vertical contraints
-                addContraintsWithFormat(format: "V:|-25-[v0(150)]-8-[v1(44)]-16-[v2(1)]|", views: thumbnailImageView, profileImage, seperatorView)
-                addContraintsWithFormat(format: "H:|[v0]|", views: seperatorView)
-            addContraintsWithFormat(format: "H:|-200-[v0]-20-|", views: titleLabel)
-            addContraintsWithFormat(format: "V:|-25-[v0(25)]-8-|", views: titleLabel)
-            addContraintsWithFormat(format: "H:|-200-[v0]-20-|", views: descriptionLabel)
-            addContraintsWithFormat(format: "V:|-60-[v0(120)]-8-|", views: descriptionLabel)
+            thumbnailImageView.translatesAutoresizingMaskIntoConstraints = false
+            thumbnailImageView.heightAnchor.constraint(equalToConstant: self.frame.height * 0.8).isActive = true
+            thumbnailImageView.widthAnchor.constraint(equalToConstant: self.frame.width * 0.4).isActive = true
+            thumbnailImageView.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor).isActive = true
+            thumbnailImageView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
             
-////            top contraints
-//            addConstraints([NSLayoutConstraint(item: titleLabel, attribute: .top, relatedBy: .equal, toItem: thumbnailImageView, attribute: .top, multiplier: 1, constant: 8)])
-////
-//            //left contraints
-//            addConstraints([NSLayoutConstraint(item: titleLabel, attribute: .left, relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 8)])
-//
-////            //right contraints
-//            addConstraints([NSLayoutConstraint(item: titleLabel, attribute: .right, relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 8)])
-//            addContraintsWithFormat(format: "V:[v0(20)]", views: titleLabel)
-//            addContraintsWithFormat(format: "H:|[v0]|", views: titleLabel)
-//            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0(1)]|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0": seperatorView]))
-        
+            titleLabel.translatesAutoresizingMaskIntoConstraints = false
+            titleLabel.heightAnchor.constraint(equalToConstant: self.frame.height * 0.2).isActive = true
+            titleLabel.leftAnchor.constraint(equalTo: thumbnailImageView.rightAnchor, constant: 5).isActive = true
+            titleLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -5).isActive = true
+            titleLabel.topAnchor.constraint(equalTo: thumbnailImageView.topAnchor).isActive = true
+            
+            descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+            descriptionLabel.leftAnchor.constraint(equalTo: thumbnailImageView.rightAnchor, constant: 5).isActive = true
+            descriptionLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -5).isActive = true
+            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
+            descriptionLabel.bottomAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor).isActive = true
+            
+
         }
+        
         required init?(coder aDecoder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
     }
 }
-extension UIView {
-        func addContraintsWithFormat(format: String, views: UIView...) {
-            
-            var viewsDictionary = [String: UIView]()
-            for (index, view) in views.enumerated() {
-                let key = "v\(index)"
-                view.translatesAutoresizingMaskIntoConstraints = false
-                viewsDictionary[key] = view
-            }
-            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: viewsDictionary))
-            
-        }
-    }
-
-
