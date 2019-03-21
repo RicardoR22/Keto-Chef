@@ -10,6 +10,7 @@ import UIKit
 
 class RecipeFormViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate {
 
+    let network = NetworkingService()
     var recipeFormView: RecipeFormView!
 
     var currentStep = 1
@@ -87,6 +88,8 @@ class RecipeFormViewController: UIViewController, UITableViewDataSource, UITable
         if currentStep < 3 {
             currentStep += 1
             stepHandler()
+        } else if currentStep == 3 {
+            createRecipe()
         }
     }
     
@@ -152,6 +155,17 @@ class RecipeFormViewController: UIViewController, UITableViewDataSource, UITable
         }))
         
         self.present(alert, animated: true)
+    }
+    
+    func createRecipe(){
+        let recipeName = self.recipeFormView.recipeNameField.text!
+        let recipeDescription = self.recipeFormView.recipeInfoField.text!
+        let recipeIngredients = self.recipeFormView.ingredientsList
+        let recipeDirections = self.recipeFormView.directionsList
+        
+        let recipe = Recipe(name: recipeName, description: recipeDescription, ingredients: recipeIngredients, directions: recipeDirections)
+        
+        network.saveRecipe(recipe: recipe)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

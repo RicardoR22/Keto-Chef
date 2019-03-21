@@ -20,6 +20,7 @@
 		8D7F51C92242143300FB2267 /* IngredientsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F51C82242143300FB2267 /* IngredientsTableViewCell.swift */; };
 		8D7F51CB224218D100FB2267 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F51CA224218D100FB2267 /* Extensions.swift */; };
 		8D7F51CD2243559200FB2267 /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F51CC2243559200FB2267 /* NetworkingService.swift */; };
+		8D7F51CF2243585D00FB2267 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F51CE2243585D00FB2267 /* Recipe.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		8D7F51C82242143300FB2267 /* IngredientsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsTableViewCell.swift; sourceTree = "<group>"; };
 		8D7F51CA224218D100FB2267 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8D7F51CC2243559200FB2267 /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
+		8D7F51CE2243585D00FB2267 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		999254B118CCA9A355741BE7 /* Pods-Keto-Chef.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keto-Chef.release.xcconfig"; path = "Target Support Files/Pods-Keto-Chef/Pods-Keto-Chef.release.xcconfig"; sourceTree = "<group>"; };
 		C66B401E38F71156571179B1 /* Pods-Keto-Chef.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keto-Chef.debug.xcconfig"; path = "Target Support Files/Pods-Keto-Chef/Pods-Keto-Chef.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -119,6 +121,7 @@
 		8D7F51BF22420C4700FB2267 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8D7F51CE2243585D00FB2267 /* Recipe.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				8D7F51C92242143300FB2267 /* IngredientsTableViewCell.swift in Sources */,
 				8D7F51BA22420A8A00FB2267 /* RecipeFormViewController.swift in Sources */,
 				8D7F51C72242112800FB2267 /* RecipesFormVC_Constraints.swift in Sources */,
+				8D7F51CF2243585D00FB2267 /* Recipe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
