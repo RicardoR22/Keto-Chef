@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		26227516920C5C7EB74566DA /* Pods_Keto_Chef.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 574D2256974936C58707C7B6 /* Pods_Keto_Chef.framework */; };
 		8D7F51A622418A0E00FB2267 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F51A522418A0E00FB2267 /* AppDelegate.swift */; };
-		8D7F51A822418A0E00FB2267 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F51A722418A0E00FB2267 /* ViewController.swift */; };
+		8D7F51A822418A0E00FB2267 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F51A722418A0E00FB2267 /* FeedViewController.swift */; };
 		8D7F51AD22418A1000FB2267 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D7F51AC22418A1000FB2267 /* Assets.xcassets */; };
 		8D7F51B022418A1000FB2267 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D7F51AE22418A1000FB2267 /* LaunchScreen.storyboard */; };
 		8D7F51B822419E1600FB2267 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D7F51B722419E1600FB2267 /* GoogleService-Info.plist */; };
@@ -22,7 +22,7 @@
 		574D2256974936C58707C7B6 /* Pods_Keto_Chef.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Keto_Chef.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D7F51A222418A0E00FB2267 /* Keto-Chef.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Keto-Chef.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D7F51A522418A0E00FB2267 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8D7F51A722418A0E00FB2267 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8D7F51A722418A0E00FB2267 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		8D7F51AC22418A1000FB2267 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D7F51AF22418A1000FB2267 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D7F51B122418A1000FB2267 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -92,7 +92,7 @@
 		8D7F51BD22420C1F00FB2267 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				8D7F51A722418A0E00FB2267 /* ViewController.swift */,
+				8D7F51A722418A0E00FB2267 /* FeedViewController.swift */,
 				8D7F51B922420A8A00FB2267 /* RecipeFormViewController.swift */,
 			);
 			path = Controllers;
@@ -110,7 +110,8 @@
 			isa = PBXGroup;
 			children = (
 			);
-			path = Models;
+			name = Models;
+			path = ../Models;
 			sourceTree = "<group>";
 		};
 		8D7F51C022420C5400FB2267 /* Extensions */ = {
@@ -277,7 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D7F51A822418A0E00FB2267 /* ViewController.swift in Sources */,
+				8D7F51A822418A0E00FB2267 /* FeedViewController.swift in Sources */,
 				8D7F51A622418A0E00FB2267 /* AppDelegate.swift in Sources */,
 				8D7F51C522420E8100FB2267 /* RecipeFormView_Constraints.swift in Sources */,
 				8D7F51BC22420BCA00FB2267 /* RecipeFormView.swift in Sources */,
