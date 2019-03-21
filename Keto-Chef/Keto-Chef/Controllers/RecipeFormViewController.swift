@@ -25,8 +25,8 @@ class RecipeFormViewController: UIViewController, UITableViewDataSource, UITable
     // MARK: View setup
     
     func setup() {
-        setupView()
         setupNav()
+        setupView()
         recipeFormView.ingredientsListTable.delegate = self
         recipeFormView.ingredientsListTable.dataSource = self
         recipeFormView.directionsListTable.delegate = self
@@ -37,7 +37,16 @@ class RecipeFormViewController: UIViewController, UITableViewDataSource, UITable
     func setupNav() {
         navigationController?.navigationBar.tintColor = UIColor(white: 1, alpha: 0.7)
         navigationItem.title = "Create Recipe"
+        
+        let cancelRecipe = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelRecipeTapped))
+        cancelRecipe.tintColor = UIColor(red: 61/255, green: 204/255, blue: 142/255, alpha: 1)
+        navigationItem.leftBarButtonItem = cancelRecipe
     }
+    
+    @objc func cancelRecipeTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     
     func setupView() {
         let mainView = RecipeFormView(frame: self.view.frame)
