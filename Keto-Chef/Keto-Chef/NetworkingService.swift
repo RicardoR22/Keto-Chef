@@ -32,5 +32,29 @@ class NetworkingService {
     }
 
     
+    func getRecipes(completion: @escaping ([Recipe]) -> Void ) {
+        var recipesList: [Recipe] = []
+        
+        var ref: DatabaseReference!
+        ref = Database.database().reference().child("recipes")
+        ref.observe(DataEventType.value, with: { (snapshot) in
+            let postDict = snapshot.value as? [String : Any] ?? [:]
+            for rest in postDict{
+                guard let restDict = rest.value as? [String: Any ] else { continue }
+                guard let name = restDict["name"],
+                    let description = restDict["description"],
+                    let ingredients = restDict["ingredients"],
+                    let directions = restDict["directions"] else { return }
+
+                let recipe = Recipe(name: name as! String, description: description as! String, ingredients: ingredients as! [String], directions: directions as! [String])
+                print("this is a recipe \(recipe)")
+                recipesList.append(recipe)
+                
+            }
+            completion(recipesList)
+        })
+        
+    }
+    
     
 }

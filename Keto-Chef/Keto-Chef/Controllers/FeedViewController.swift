@@ -7,12 +7,24 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 
 class FeedViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    let network = NetworkingService()
+    
+    var recipesFromDB: [Recipe] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        network.getRecipes(){ (recipeList) in
+            self.recipesFromDB = recipeList
+            print("these are the recipes \(self.recipesFromDB)")
+            self.collectionView.reloadData()
+            
+        }
         // Do any additional setup after loading the view, typically from a nib.
         
         navigationItem.title = "All Recipes"
@@ -32,11 +44,12 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return recipesFromDB.count
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
-//        cell.backgroundColor = .red
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! RecipeCell
+        let recipe = recipesFromDB[indexPath.row]
+        cell.configure(recipe: recipe)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -49,6 +62,11 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         override init(frame: CGRect) {
             super.init(frame: frame)
             setupViews()
+        }
+        
+        func configure(recipe: Recipe) {
+            titleLabel.text = recipe.recipeName
+            descriptionLabel.text = recipe.recipeDescription
         }
         
         let thumbnailImageView: UIImageView = {
@@ -67,14 +85,21 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         let titleLabel: UILabel = {
             let label = UILabel()
             label.backgroundColor = UIColor.init(red: 61/255, green: 204/255, blue: 142/255, alpha: 1)
-            label.translatesAutoresizingMaskIntoConstraints = false
+            label.font = UIFont.boldSystemFont(ofSize: 18)
+            label.adjustsFontSizeToFitWidth = true
+            label.textAlignment = .center
             return label
         }()
         
         let descriptionLabel: UILabel = {
             let label = UILabel()
-            label.backgroundColor = UIColor.init(red: 61/255, green: 204/255, blue: 142/255, alpha: 1)
-            label.translatesAutoresizingMaskIntoConstraints = false
+            //label.backgroundColor = UIColor.init(red: 61/255, green: 204/255, blue: 142/255, alpha: 1)
+            //label.textColor = UIColor.init(red: 61/255, green: 204/255, blue: 142/255, alpha: 1)
+            label.sizeToFit()
+            label.numberOfLines = 0
+            label.lineBreakMode = .byWordWrapping
+            label.textAlignment = .center
+            
             return label
         }()
         
@@ -106,7 +131,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
             descriptionLabel.leftAnchor.constraint(equalTo: thumbnailImageView.rightAnchor, constant: 5).isActive = true
             descriptionLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -5).isActive = true
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
-            descriptionLabel.bottomAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor).isActive = true
+            //descriptionLabel.bottomAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor).isActive = true
             
 
         }

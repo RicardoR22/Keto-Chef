@@ -26,7 +26,7 @@ class RecipeFormViewController: UIViewController, UITableViewDataSource, UITable
     
     func setup() {
         setupNav()
-        setupView()
+        setupView() 
         recipeFormView.ingredientsListTable.delegate = self
         recipeFormView.ingredientsListTable.dataSource = self
         recipeFormView.directionsListTable.delegate = self
