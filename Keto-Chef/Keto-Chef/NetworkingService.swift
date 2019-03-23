@@ -38,6 +38,7 @@ class NetworkingService {
         var ref: DatabaseReference!
         ref = Database.database().reference().child("recipes")
         ref.observe(DataEventType.value, with: { (snapshot) in
+            recipesList.removeAll()
             let postDict = snapshot.value as? [String : Any] ?? [:]
             for rest in postDict{
                 guard let restDict = rest.value as? [String: Any ] else { continue }
