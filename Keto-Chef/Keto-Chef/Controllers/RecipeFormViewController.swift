@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RecipeFormViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate {
+class RecipeFormViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UITextFieldDelegate {
 
     let network = NetworkingService()
     var recipeFormView: RecipeFormView!
@@ -32,6 +32,7 @@ class RecipeFormViewController: UIViewController, UITableViewDataSource, UITable
         recipeFormView.directionsListTable.delegate = self
         recipeFormView.directionsListTable.dataSource = self
         recipeFormView.recipeInfoField.delegate = self
+        recipeFormView.recipeNameField.delegate = self
     }
     
     func setupNav() {
@@ -93,12 +94,44 @@ class RecipeFormViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
+    func checkForValidInput() -> Bool {
+        if currentStep == 1 {
+            print("in step 1")
+            if recipeFormView.recipeNameField.text == nil || recipeFormView.recipeNameField.text == "Recipe Name"{
+                print("No Valid Recipe Name")
+                missingContentWarning(missingContent: "Recipe Name")
+                return false
+            } else if recipeFormView.recipeInfoField.text == nil || recipeFormView.recipeInfoField.text == "Recipe Description"{
+                missingContentWarning(missingContent: "Recipe Description")
+                return false
+            }
+            return true
+        } else if currentStep == 2 {
+            if recipeFormView.ingredientsList.count == 0 {
+                missingContentWarning(missingContent: "Ingredients")
+                return false
+            }
+            return true
+        } else if currentStep == 3 {
+            if recipeFormView.directionsList.count == 0 {
+                missingContentWarning(missingContent: "Directions")
+                return false
+            }
+            return true
+        }
+        return true
+    }
+    
     @objc func nextBtnTapped() {
         if currentStep < 3 {
-            currentStep += 1
-            stepHandler()
+            if checkForValidInput() {
+                currentStep += 1
+                stepHandler()
+            }
         } else if currentStep == 3 {
-            createRecipe()
+            if checkForValidInput() {
+                createRecipe()
+            }
         }
     }
     
@@ -162,6 +195,15 @@ class RecipeFormViewController: UIViewController, UITableViewDataSource, UITable
                 self.recipeFormView.directionsListTable.reloadData()
             }
         }))
+        
+        self.present(alert, animated: true)
+    }
+    
+    func missingContentWarning(missingContent: String) {
+
+        let alert = UIAlertController(title: "You are missing: \(missingContent)", message: "Please make sure all fields are filled out", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        
         
         self.present(alert, animated: true)
     }
@@ -242,6 +284,29 @@ class RecipeFormViewController: UIViewController, UITableViewDataSource, UITable
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text == "" {
             textView.attributedText = NSMutableAttributedString(attributedString: NSAttributedString(string: "Recipe Description", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(white: 1, alpha: 0.9)]))
+        }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField.text == "Recipe Name" {
+            textField.text = ""
+            textField.textColor = UIColor.black
+            textField.font = UIFont.systemFont(ofSize: 20)
+        }
+    }
+    
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string == "\n" {
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+    
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField.text == "" {
+            textField.attributedText = NSMutableAttributedString(attributedString: NSAttributedString(string: "Recipe Name", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(white: 1, alpha: 0.9)]))
         }
     }
     

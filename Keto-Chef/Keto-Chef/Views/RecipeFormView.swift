@@ -27,7 +27,6 @@ class RecipeFormView: UIView {
         backgroundColor = .white
         setupSubViews()
         createHeaderView()
-        //createButton.isHidden = true
         ingredientsListTable.isHidden = true
         directionsListTable.isHidden = true
         backButton.isHidden = true
@@ -59,6 +58,7 @@ class RecipeFormView: UIView {
         textField.text = "Give your recipe a name and short description"
         return textField
     }()
+
     
     let recipeNameField: UITextField = {
         let textField = UITextField()
@@ -68,7 +68,7 @@ class RecipeFormView: UIView {
         textField.textColor = .black
         
         let placeholder = NSMutableAttributedString(attributedString: NSAttributedString(string: "Recipe Name", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(white: 1, alpha: 0.9)]))
-        textField.attributedPlaceholder = placeholder
+        textField.attributedText = placeholder
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
         textField.leftPadding(space: 5)
@@ -90,17 +90,6 @@ class RecipeFormView: UIView {
         textField.textContainerInset = UIEdgeInsets(top: 5,left: 2,bottom: 0,right: 5)
         return textField
     }()
-    
-//    let createButton: UIButton = {
-//        let button = UIButton()
-//        let buttonColor = UIColor(white: 1, alpha: 0.7)
-//        let buttonText = NSMutableAttributedString(attributedString: NSAttributedString(string: "Create", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(white: 1, alpha: 0.9)]))
-//        button.backgroundColor = UIColor(red: 61/255, green: 204/255, blue: 142/255, alpha: 1)
-//        button.setAttributedTitle(buttonText, for: .normal)
-//        button.layer.cornerRadius = 5
-//        button.heightAnchor.constraint(equalToConstant: 40)
-//        return button
-//    }()
     
     let nextButton: UIButton = {
         let button = UIButton()
