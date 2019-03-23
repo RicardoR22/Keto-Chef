@@ -175,6 +175,8 @@ class RecipeFormViewController: UIViewController, UITableViewDataSource, UITable
         let recipe = Recipe(name: recipeName, description: recipeDescription, ingredients: recipeIngredients, directions: recipeDirections)
         
         network.saveRecipe(recipe: recipe)
+        
+        navigationController?.popToRootViewController(animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
