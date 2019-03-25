@@ -44,14 +44,7 @@ extension RecipeFormView {
         recipeInfoField.widthAnchor.constraint(equalToConstant: self.frame.width * 0.95).isActive = true
         recipeInfoField.heightAnchor.constraint(equalToConstant: 100).isActive = true
         
-        // Create Button Constraints
-//        
-//        createButton.translatesAutoresizingMaskIntoConstraints = false
-//        createButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -40).isActive = true
-//        createButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-//        createButton.heightAnchor.constraint(equalToConstant: self.frame.height * 0.08).isActive = true
-//        createButton.widthAnchor.constraint(equalToConstant: self.frame.width * 0.75).isActive = true
-        
+
         // Next Button Constraints
         
         nextButton.translatesAutoresizingMaskIntoConstraints = false
