@@ -52,8 +52,9 @@ class RecipeDetailsViewController: UIViewController, UITableViewDelegate, UITabl
         self.recipeDetailView = mainView
         self.view.addSubview(recipeDetailView)
         recipeDetailView.descriptionLabel.text = self.recipe.recipeDescription
-
         setRecipeDetailsViewConstraints()
+        self.recipeDetailView.ingredientsListTable.tableFooterView = UIView()
+        self.recipeDetailView.directionsListTable.tableFooterView = UIView()
     }
     
     
@@ -91,7 +92,11 @@ class RecipeDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 500
     }
 
     
