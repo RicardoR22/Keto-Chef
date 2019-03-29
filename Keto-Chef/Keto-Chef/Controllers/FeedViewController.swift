@@ -58,10 +58,17 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 1
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let recipeDetailVC = RecipeDetailsViewController()
+        recipeDetailVC.recipe = recipesFromDB[indexPath.row]
+        navigationController?.pushViewController(recipeDetailVC, animated: true)
+    }
     class RecipeCell: UICollectionViewCell {
         override init(frame: CGRect) {
             super.init(frame: frame)
             setupViews()
+            self.clipsToBounds = true
         }
         
         func configure(recipe: Recipe) {

@@ -21,6 +21,10 @@
 		8D7F51CB224218D100FB2267 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F51CA224218D100FB2267 /* Extensions.swift */; };
 		8D7F51CD2243559200FB2267 /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F51CC2243559200FB2267 /* NetworkingService.swift */; };
 		8D7F51CF2243585D00FB2267 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F51CE2243585D00FB2267 /* Recipe.swift */; };
+		8D7F51D122487FC700FB2267 /* RecipeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F51D022487FC700FB2267 /* RecipeDetailsViewController.swift */; };
+		8D7F51D322487FE100FB2267 /* RecipeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F51D222487FE100FB2267 /* RecipeDetailsView.swift */; };
+		8D7F51D52248838D00FB2267 /* RecipeDetailsView_Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F51D42248838D00FB2267 /* RecipeDetailsView_Constraints.swift */; };
+		8D7F51D722488A7800FB2267 /* RecipeDetailsVC_Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F51D622488A7800FB2267 /* RecipeDetailsVC_Constraints.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +44,10 @@
 		8D7F51CA224218D100FB2267 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8D7F51CC2243559200FB2267 /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
 		8D7F51CE2243585D00FB2267 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		8D7F51D022487FC700FB2267 /* RecipeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsViewController.swift; sourceTree = "<group>"; };
+		8D7F51D222487FE100FB2267 /* RecipeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsView.swift; sourceTree = "<group>"; };
+		8D7F51D42248838D00FB2267 /* RecipeDetailsView_Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsView_Constraints.swift; sourceTree = "<group>"; };
+		8D7F51D622488A7800FB2267 /* RecipeDetailsVC_Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsVC_Constraints.swift; sourceTree = "<group>"; };
 		999254B118CCA9A355741BE7 /* Pods-Keto-Chef.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keto-Chef.release.xcconfig"; path = "Target Support Files/Pods-Keto-Chef/Pods-Keto-Chef.release.xcconfig"; sourceTree = "<group>"; };
 		C66B401E38F71156571179B1 /* Pods-Keto-Chef.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keto-Chef.debug.xcconfig"; path = "Target Support Files/Pods-Keto-Chef/Pods-Keto-Chef.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,6 +113,7 @@
 			children = (
 				8D7F51A722418A0E00FB2267 /* FeedViewController.swift */,
 				8D7F51B922420A8A00FB2267 /* RecipeFormViewController.swift */,
+				8D7F51D022487FC700FB2267 /* RecipeDetailsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -114,6 +123,7 @@
 			children = (
 				8D7F51BB22420BCA00FB2267 /* RecipeFormView.swift */,
 				8D7F51C82242143300FB2267 /* IngredientsTableViewCell.swift */,
+				8D7F51D222487FE100FB2267 /* RecipeDetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -148,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				8D7F51C62242112800FB2267 /* RecipesFormVC_Constraints.swift */,
+				8D7F51D622488A7800FB2267 /* RecipeDetailsVC_Constraints.swift */,
 			);
 			path = Controllers_Constraints;
 			sourceTree = "<group>";
@@ -156,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				8D7F51C422420E8100FB2267 /* RecipeFormView_Constraints.swift */,
+				8D7F51D42248838D00FB2267 /* RecipeDetailsView_Constraints.swift */,
 			);
 			path = View_Constraints;
 			sourceTree = "<group>";
@@ -296,11 +308,15 @@
 				8D7F51A622418A0E00FB2267 /* AppDelegate.swift in Sources */,
 				8D7F51C522420E8100FB2267 /* RecipeFormView_Constraints.swift in Sources */,
 				8D7F51CD2243559200FB2267 /* NetworkingService.swift in Sources */,
+				8D7F51D722488A7800FB2267 /* RecipeDetailsVC_Constraints.swift in Sources */,
 				8D7F51CB224218D100FB2267 /* Extensions.swift in Sources */,
 				8D7F51BC22420BCA00FB2267 /* RecipeFormView.swift in Sources */,
 				8D7F51C92242143300FB2267 /* IngredientsTableViewCell.swift in Sources */,
+				8D7F51D322487FE100FB2267 /* RecipeDetailsView.swift in Sources */,
 				8D7F51BA22420A8A00FB2267 /* RecipeFormViewController.swift in Sources */,
 				8D7F51C72242112800FB2267 /* RecipesFormVC_Constraints.swift in Sources */,
+				8D7F51D122487FC700FB2267 /* RecipeDetailsViewController.swift in Sources */,
+				8D7F51D52248838D00FB2267 /* RecipeDetailsView_Constraints.swift in Sources */,
 				8D7F51CF2243585D00FB2267 /* Recipe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -441,6 +457,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K5SBR68WW2;
 				INFOPLIST_FILE = "Keto-Chef/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -459,6 +476,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K5SBR68WW2;
 				INFOPLIST_FILE = "Keto-Chef/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

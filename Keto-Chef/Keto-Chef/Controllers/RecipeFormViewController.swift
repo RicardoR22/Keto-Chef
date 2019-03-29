@@ -18,7 +18,6 @@ class RecipeFormViewController: UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -55,6 +54,8 @@ class RecipeFormViewController: UIViewController, UITableViewDataSource, UITable
         self.view.addSubview(recipeFormView)
         setRecipeFormViewConstraints()
         addButtonTarget()
+        self.recipeFormView.ingredientsListTable.tableFooterView = UIView()
+        self.recipeFormView.directionsListTable.tableFooterView = UIView()
     }
     
     
@@ -165,9 +166,10 @@ class RecipeFormViewController: UIViewController, UITableViewDataSource, UITable
             
             if let itemName = alert.textFields?.first?.text {
                 print("WORKING")
-
-                self.recipeFormView.ingredientsList.append(itemName)
-                self.recipeFormView.ingredientsListTable.reloadData()
+                if itemName.isEmpty == false {
+                    self.recipeFormView.ingredientsList.append(itemName)
+                    self.recipeFormView.ingredientsListTable.reloadData()
+                }
             }
         }))
         
@@ -189,10 +191,10 @@ class RecipeFormViewController: UIViewController, UITableViewDataSource, UITable
             
             if let itemName = alert.textFields?.first?.text {
                 print("WORKING")
-                
-                self.recipeFormView.directionsList.append(itemName)
-                print("item added")
-                self.recipeFormView.directionsListTable.reloadData()
+                if itemName.isEmpty == false {
+                    self.recipeFormView.directionsList.append(itemName)
+                    self.recipeFormView.directionsListTable.reloadData()
+                }
             }
         }))
         
@@ -261,7 +263,11 @@ class RecipeFormViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 500
     }
     
     //MARK:- UITextViewDelegates
