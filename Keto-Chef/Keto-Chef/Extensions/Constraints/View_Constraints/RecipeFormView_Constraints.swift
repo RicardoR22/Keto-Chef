@@ -44,6 +44,14 @@ extension RecipeFormView {
         recipeInfoField.widthAnchor.constraint(equalToConstant: self.frame.width * 0.95).isActive = true
         recipeInfoField.heightAnchor.constraint(equalToConstant: 100).isActive = true
         
+        // Select Image Button Constraints
+        
+        selectImageButton.translatesAutoresizingMaskIntoConstraints = false
+        selectImageButton.topAnchor.constraint(equalTo: recipeInfoField.bottomAnchor, constant: 40).isActive = true
+        selectImageButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        selectImageButton.heightAnchor.constraint(equalToConstant: self.frame.height * 0.05).isActive = true
+        selectImageButton.widthAnchor.constraint(equalToConstant: self.frame.width * 0.3).isActive = true
+        
 
         // Next Button Constraints
         

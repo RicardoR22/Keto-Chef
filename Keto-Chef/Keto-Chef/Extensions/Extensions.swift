@@ -16,4 +16,15 @@ extension UITextField {
     }
 }
 
-
+extension RecipeFormViewController: UIImagePickerControllerDelegate,UINavigationControllerDelegate
+{
+    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
+    {
+        guard let image_data = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
+            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+        }
+        let imageData:Data = image_data.pngData()!
+        let imageStr = imageData.base64EncodedString()
+        self.dismiss(animated: true, completion: nil)
+    }
+}
