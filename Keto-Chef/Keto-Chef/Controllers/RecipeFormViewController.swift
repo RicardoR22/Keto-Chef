@@ -68,6 +68,12 @@ class RecipeFormViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func stepHandler() {
+        
+        /* Get the subviews of the formView and checks to see
+         if the subviews tag is equal to the current step of the creation process.
+         if it is, make it visible, if not hide it from the user.
+        */
+        
         for subview in self.recipeFormView.formView.subviews {
             if subview.tag == currentStep {
                 subview.isHidden = false
@@ -75,6 +81,11 @@ class RecipeFormViewController: UIViewController, UITableViewDataSource, UITable
                 subview.isHidden = true
             }
         }
+        
+        /* Checks the current step and changes the Instruction label text to the appropriate instruction
+         also changes whether the back button is visible or if the next button should be changed to Create
+        */
+        
         if currentStep == 1 {
             self.recipeFormView.backButton.isHidden = true
             self.recipeFormView.InstructionLabel.text = "Give your recipe a name and short description"
@@ -89,6 +100,8 @@ class RecipeFormViewController: UIViewController, UITableViewDataSource, UITable
             self.recipeFormView.InstructionLabel.text = "Now let's add some step by step instructions"
         }
     }
+    
+   
     
     func checkForValidInput() -> Bool {
         if currentStep == 1 {
