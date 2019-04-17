@@ -33,6 +33,8 @@ class RecipeFormView: UIView {
         ingredientsListTable.register(IngredientsTableViewCell.self, forCellReuseIdentifier: "ingredient cell")
         directionsListTable.register(IngredientsTableViewCell.self, forCellReuseIdentifier: "ingredient cell")
         setViewConstraints()
+        ingredientsListTable.tag = 2
+        directionsListTable.tag = 3
     }
     
     func setupSubViews() {
@@ -40,6 +42,7 @@ class RecipeFormView: UIView {
         addSubview(formView)
         formView.addSubview(recipeNameField)
         formView.addSubview(recipeInfoField)
+        formView.addSubview(selectImageButton)
         formView.addSubview(ingredientsListTable)
         formView.addSubview(directionsListTable)
         addSubview(backButton)
@@ -72,6 +75,7 @@ class RecipeFormView: UIView {
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
         textField.leftPadding(space: 5)
+        textField.tag = 1
         return textField
     }()
     
@@ -88,7 +92,19 @@ class RecipeFormView: UIView {
         //textField.clearsOnInsertion = true
         textField.isEditable = true
         textField.textContainerInset = UIEdgeInsets(top: 5,left: 2,bottom: 0,right: 5)
+        textField.tag = 1
         return textField
+    }()
+    
+    let selectImageButton: UIButton = {
+        let button = UIButton()
+        let buttonColor = UIColor(white: 1, alpha: 0.7)
+        let buttonText = NSMutableAttributedString(attributedString: NSAttributedString(string: "Select Image", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(white: 1, alpha: 0.9)]))
+        button.backgroundColor = UIColor(red: 61/255, green: 204/255, blue: 142/255, alpha: 1)
+        button.setAttributedTitle(buttonText, for: .normal)
+        button.layer.cornerRadius = 5
+        button.tag = 1
+        return button
     }()
     
     let nextButton: UIButton = {

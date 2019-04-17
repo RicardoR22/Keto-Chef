@@ -68,28 +68,23 @@ class RecipeFormViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func stepHandler() {
+        for subview in self.recipeFormView.formView.subviews {
+            if subview.tag == currentStep {
+                subview.isHidden = false
+            } else {
+                subview.isHidden = true
+            }
+        }
         if currentStep == 1 {
-            self.recipeFormView.recipeNameField.isHidden = false
-            self.recipeFormView.recipeInfoField.isHidden = false
-            self.recipeFormView.ingredientsListTable.isHidden = true
-            self.recipeFormView.directionsListTable.isHidden = true
             self.recipeFormView.backButton.isHidden = true
-            let nextBtnTitle = NSMutableAttributedString(attributedString: NSAttributedString(string: "Next", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(white: 1, alpha: 0.9)]))
-            self.recipeFormView.nextButton.setAttributedTitle(nextBtnTitle, for: .normal)
             self.recipeFormView.InstructionLabel.text = "Give your recipe a name and short description"
         } else if currentStep == 2 {
-            self.recipeFormView.recipeNameField.isHidden = true
-            self.recipeFormView.recipeInfoField.isHidden = true
-            self.recipeFormView.ingredientsListTable.isHidden = false
-            self.recipeFormView.directionsListTable.isHidden = true
             self.recipeFormView.backButton.isHidden = false
             let nextBtnTitle = NSMutableAttributedString(attributedString: NSAttributedString(string: "Next", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(white: 1, alpha: 0.9)]))
             self.recipeFormView.nextButton.setAttributedTitle(nextBtnTitle, for: .normal)
             self.recipeFormView.InstructionLabel.text = "Now let's add the ingredients"
         } else if currentStep == 3 {
-            self.recipeFormView.ingredientsListTable.isHidden = true
-            self.recipeFormView.directionsListTable.isHidden = false
-            let nextBtnTitle = NSMutableAttributedString(attributedString: NSAttributedString(string: "Create!", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(white: 1, alpha: 0.9)]))
+            let nextBtnTitle = NSMutableAttributedString(attributedString: NSAttributedString(string: "Create", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(white: 1, alpha: 0.9)]))
             self.recipeFormView.nextButton.setAttributedTitle(nextBtnTitle, for: .normal)
             self.recipeFormView.InstructionLabel.text = "Now let's add some step by step instructions"
         }
@@ -97,9 +92,7 @@ class RecipeFormViewController: UIViewController, UITableViewDataSource, UITable
     
     func checkForValidInput() -> Bool {
         if currentStep == 1 {
-            print("in step 1")
             if recipeFormView.recipeNameField.text == nil || recipeFormView.recipeNameField.text == "Recipe Name"{
-                print("No Valid Recipe Name")
                 missingContentWarning(missingContent: "Recipe Name")
                 return false
             } else if recipeFormView.recipeInfoField.text == nil || recipeFormView.recipeInfoField.text == "Recipe Description"{
@@ -143,11 +136,19 @@ class RecipeFormViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
+    @objc func selectImageBtnTapped() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.sourceType =  UIImagePickerController.SourceType.photoLibrary
+        self.present(imagePickerController, animated: true, completion: nil)
+    }
+    
     func addButtonTarget() {
         recipeFormView.nextButton.addTarget(self, action: #selector(nextBtnTapped), for: .touchUpInside)
         recipeFormView.backButton.addTarget(self, action: #selector(backBtnTapped), for: .touchUpInside)
         recipeFormView.addItemBtn.addTarget(self, action: #selector(addIngredientTapped), for: .touchUpInside)
         recipeFormView.addDirectionBtn.addTarget(self, action: #selector(addDirectionTapped), for: .touchUpInside)
+        recipeFormView.selectImageButton.addTarget(self, action: #selector(selectImageBtnTapped), for: .touchUpInside)
     
     }
     

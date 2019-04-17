@@ -78,7 +78,8 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         
         let thumbnailImageView: UIImageView = {
             let imageView = UIImageView()
-            imageView.backgroundColor = UIColor.init(red: 61/255, green: 204/255, blue: 142/255, alpha: 1)
+            //imageView.backgroundColor = UIColor.init(red: 61/255, green: 204/255, blue: 142/255, alpha: 1)
+            imageView.image = UIImage(named: "PlaceHolderImage")
             return imageView
         }()
         
@@ -92,7 +93,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
         let titleLabel: UILabel = {
             let label = UILabel()
             label.backgroundColor = UIColor.init(red: 61/255, green: 204/255, blue: 142/255, alpha: 1)
-            label.font = UIFont.boldSystemFont(ofSize: 18)
+            label.font = UIFont.boldSystemFont(ofSize: 16)
             label.adjustsFontSizeToFitWidth = true
             label.textAlignment = .center
             return label
@@ -119,7 +120,7 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
             
             thumbnailImageView.translatesAutoresizingMaskIntoConstraints = false
             thumbnailImageView.heightAnchor.constraint(equalToConstant: self.frame.height * 0.8).isActive = true
-            thumbnailImageView.widthAnchor.constraint(equalToConstant: self.frame.width * 0.4).isActive = true
+            thumbnailImageView.widthAnchor.constraint(equalToConstant: self.frame.width * 0.375).isActive = true
             thumbnailImageView.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor).isActive = true
             thumbnailImageView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
             
@@ -130,12 +131,12 @@ class FeedViewController: UICollectionViewController, UICollectionViewDelegateFl
             
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
             titleLabel.heightAnchor.constraint(equalToConstant: self.frame.height * 0.2).isActive = true
-            titleLabel.leftAnchor.constraint(equalTo: thumbnailImageView.rightAnchor, constant: 5).isActive = true
+            titleLabel.leftAnchor.constraint(equalTo: thumbnailImageView.rightAnchor, constant: 10).isActive = true
             titleLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -5).isActive = true
             titleLabel.topAnchor.constraint(equalTo: thumbnailImageView.topAnchor).isActive = true
             
             descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-            descriptionLabel.leftAnchor.constraint(equalTo: thumbnailImageView.rightAnchor, constant: 5).isActive = true
+            descriptionLabel.leftAnchor.constraint(equalTo: thumbnailImageView.rightAnchor, constant: 10).isActive = true
             descriptionLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -5).isActive = true
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
             //descriptionLabel.bottomAnchor.constraint(equalTo: thumbnailImageView.bottomAnchor).isActive = true
